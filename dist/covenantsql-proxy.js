@@ -843,7 +843,6 @@
         };
         return ObjectUtils;
     }());
-    //# sourceMappingURL=ObjectUtils.js.map
 
     /**
      * Connection class for ConvenantSQL connection
@@ -983,7 +982,6 @@
         };
         return Connection;
     }());
-    //# sourceMappingURL=Connection.js.map
 
     /**
      * Copyright 2018 The CovenantSQL Authors.
@@ -1009,7 +1007,6 @@
     var index = {
         createConnection: createConnection
     };
-    //# sourceMappingURL=index.js.map
 
     exports.createConnection = createConnection;
     exports.default = index;

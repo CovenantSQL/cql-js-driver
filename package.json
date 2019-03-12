@@ -9,6 +9,8 @@
     "blockchain",
     "typescript"
   ],
+  "main": "dist/covenantsql-proxy.cjs.js",
+  "module": "dist/covenantsql-proxy.esm.js",
   "browser": "dist/covenantsql-proxy.js",
   "description": "A javascript driver for covenantsql run in web",
   "dependencies": {

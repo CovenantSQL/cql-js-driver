@@ -27,27 +27,27 @@ export default [
   // builds from a single configuration where possible, using
   // an array for the `output` option, where we can specify
   // `file` and `format` for each target)
-  // {
-  //   input: 'src/index.ts',
-  //   external: ['fs', 'sqlstring', 'request-promise'],
-  //   watch: {
-  //     include: 'src/**',
-  //   },
-  //   output: [
-  //     { file: pkg.main, format: 'cjs' },
-  //     { file: pkg.module, format: 'es' },
-  //   ],
-  //   plugins: [
-  //     // Allow json resolution
-  //     json(),
-  //     // Compile TypeScript files
-  //     typescript({ useTsconfigDeclarationDir: true }),
-  //     // Allow bundling cjs modules (unlike webpack, rollup doesn't understand cjs)
-  //     commonjs(),
-  //     // Allow node_modules resolution, so you can use 'external' to control
-  //     // which external modules to include in the bundle
-  //     // https://github.com/rollup/rollup-plugin-node-resolve#usage
-  //     resolve(),
-  //   ],
-  // },
+  {
+    input: 'src/index.ts',
+    external: ['fs', 'sqlstring', 'request-promise'],
+    watch: {
+      include: 'src/**',
+    },
+    output: [
+      { file: pkg.main, format: 'cjs' },
+      { file: pkg.module, format: 'es' },
+    ],
+    plugins: [
+      // Allow json resolution
+      json(),
+      // Compile TypeScript files
+      typescript({ useTsconfigDeclarationDir: true }),
+      // Allow bundling cjs modules (unlike webpack, rollup doesn't understand cjs)
+      commonjs(),
+      // Allow node_modules resolution, so you can use 'external' to control
+      // which external modules to include in the bundle
+      // https://github.com/rollup/rollup-plugin-node-resolve#usage
+      resolve(),
+    ],
+  },
 ]
