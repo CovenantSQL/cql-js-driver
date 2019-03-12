@@ -1,5 +1,5 @@
 {
-  "name": "node-covenantsql",
+  "name": "covenantsql-proxy-js",
   "version": "0.1.0",
   "keywords": [
     "CovenantSQL",
@@ -9,10 +9,8 @@
     "blockchain",
     "typescript"
   ],
-  "main": "dist/node-covenantsql.cjs.js",
-  "module": "dist/node-covenantsql.esm.js",
   "browser": "dist/covenantsql-proxy.js",
-  "description": "A node.js driver for covenantsql.",
+  "description": "A javascript driver for covenantsql run in web",
   "dependencies": {
     "@types/sqlstring": "^2.2.0",
     "@types/whatwg-fetch": "^0.0.33",
