@@ -30,5 +30,5 @@ export declare class Connection {
     /**
      * _parseResult: parse CovenantSQL response
      */
-    protected _parseResult(result?: string): any;
+    protected _parseResult(result: any): any;
 }

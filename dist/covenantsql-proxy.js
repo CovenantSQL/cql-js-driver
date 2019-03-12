@@ -843,6 +843,7 @@
         };
         return ObjectUtils;
     }());
+    //# sourceMappingURL=ObjectUtils.js.map
 
     /**
      * Connection class for ConvenantSQL connection
@@ -897,7 +898,7 @@
         Connection.prototype.query = function (sql, values, isEstablish) {
             if (isEstablish === void 0) { isEstablish = false; }
             return __awaiter(this, void 0, void 0, function () {
-                var formattedSql, result, _parsed, e_2;
+                var formattedSql, rows, e_2;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
@@ -905,9 +906,8 @@
                             formattedSql = sqlstring.format(sql, values || []);
                             return [4 /*yield*/, this._fetch('query', formattedSql)];
                         case 1:
-                            result = _a.sent();
-                            _parsed = this._parseResult(result);
-                            return [2 /*return*/, _parsed.datarows];
+                            rows = _a.sent();
+                            return [2 /*return*/, rows];
                         case 2:
                             e_2 = _a.sent();
                             throw new Error(e_2);
@@ -921,7 +921,7 @@
          */
         Connection.prototype.exec = function (sql, values) {
             return __awaiter(this, void 0, void 0, function () {
-                var formattedSql, result, _parsed, e_3;
+                var formattedSql, rows, e_3;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
@@ -929,9 +929,8 @@
                             formattedSql = sqlstring.format(sql, values || []);
                             return [4 /*yield*/, this._fetch('exec', formattedSql)];
                         case 1:
-                            result = _a.sent();
-                            _parsed = this._parseResult(result);
-                            return [2 /*return*/, _parsed.status === 'ok' || _parsed.status];
+                            rows = _a.sent();
+                            return [2 /*return*/, rows];
                         case 2:
                             e_3 = _a.sent();
                             throw new Error(e_3);
@@ -945,16 +944,33 @@
          */
         Connection.prototype._fetch = function (method, sql) {
             return __awaiter(this, void 0, void 0, function () {
-                var database, uri, options;
+                var database, uri, options, res, result, _parsed, e_4;
                 return __generator(this, function (_a) {
-                    database = this.config.dbid;
-                    uri = "http://" + this.config.endpoint + "/v1/" + method;
-                    options = {
-                        method: 'POST',
-                        headers: { 'content-type': 'application/json' },
-                        body: JSON.stringify({ assoc: true, database: database, query: sql }),
-                    };
-                    return [2 /*return*/, fetch(uri, options).catch(function (e) { throw e; })];
+                    switch (_a.label) {
+                        case 0:
+                            database = this.config.dbid;
+                            uri = "http://" + this.config.endpoint + "/v1/" + method;
+                            options = {
+                                method: 'POST',
+                                headers: { 'content-type': 'application/json' },
+                                body: JSON.stringify({ assoc: true, database: database, query: sql }),
+                            };
+                            _a.label = 1;
+                        case 1:
+                            _a.trys.push([1, 4, , 5]);
+                            return [4 /*yield*/, fetch(uri, options)];
+                        case 2:
+                            res = _a.sent();
+                            return [4 /*yield*/, res.json()];
+                        case 3:
+                            result = _a.sent();
+                            _parsed = this._parseResult(result);
+                            return [2 /*return*/, _parsed.datarows];
+                        case 4:
+                            e_4 = _a.sent();
+                            throw e_4;
+                        case 5: return [2 /*return*/];
+                    }
                 });
             });
         };
@@ -962,13 +978,12 @@
          * _parseResult: parse CovenantSQL response
          */
         Connection.prototype._parseResult = function (result) {
-            if (result === void 0) { result = '{}'; }
-            var _result = JSON.parse(result);
-            var datarows = (_result.data && _result.data.rows) || null;
-            return { datarows: datarows, status: _result.status };
+            var datarows = (result.data && result.data.rows) || null;
+            return { datarows: datarows, status: result.status };
         };
         return Connection;
     }());
+    //# sourceMappingURL=Connection.js.map
 
     /**
      * Copyright 2018 The CovenantSQL Authors.
@@ -994,6 +1009,7 @@
     var index = {
         createConnection: createConnection
     };
+    //# sourceMappingURL=index.js.map
 
     exports.createConnection = createConnection;
     exports.default = index;

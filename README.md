@@ -33,7 +33,7 @@ $ ./bin/cql -adapter 127.0.0.1:6000
 ```javascript
 const config = {
     endpoint: 'localhost:6000', // local testnet endpoint without https
-    database: `${DB_ID}`, // your DB id created by `cql` tools
+    dbid: `${DB_ID}`, // your DB id created by `cql` tools
 }
 ```
 

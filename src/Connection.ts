@@ -52,10 +52,8 @@ export class Connection {
   ): Promise<any> {
     try {
       const formattedSql = SqlString.format(sql, values || [])
-      const result = await this._fetch('query', formattedSql)
-
-      const _parsed = this._parseResult(result)
-      return _parsed.datarows
+      const rows = await this._fetch('query', formattedSql)
+      return rows
     } catch (e) {
       throw new Error(e)
     }
@@ -67,9 +65,8 @@ export class Connection {
   async exec(sql: string, values?: object | Array<any>): Promise<any> {
     try {
       const formattedSql = SqlString.format(sql, values || [])
-      const result = await this._fetch('exec', formattedSql)
-      const _parsed = this._parseResult(result)
-      return _parsed.status === 'ok' || _parsed.status
+      const rows = await this._fetch('exec', formattedSql)
+      return rows
     } catch (e) {
       throw new Error(e)
     }
@@ -91,15 +88,21 @@ export class Connection {
       body: JSON.stringify({ assoc: true, database, query: sql }),
     }
 
-    return fetch(uri, options).catch(e => { throw e })
+    try {
+      const res = await fetch(uri, options)
+      const result = await res.json()
+      const _parsed = this._parseResult(result)
+      return _parsed.datarows
+    } catch (e) {
+      throw e
+    }
   }
 
   /**
    * _parseResult: parse CovenantSQL response
    */
-  protected _parseResult(result: string = '{}'): any {
-    const _result = JSON.parse(result)
-    const datarows = (_result.data && _result.data.rows) || null
-    return { datarows, status: _result.status }
+  protected _parseResult(result: any): any {
+    const datarows = (result.data && result.data.rows) || null
+    return { datarows, status: result.status }
   }
 }
