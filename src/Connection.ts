@@ -1,6 +1,5 @@
-import * as SqlString from 'sqlstring'
-import rp from 'request-promise'
-import fs from 'fs'
+import "whatwg-fetch"
+import SqlString from 'sqlstring'
 
 import { ConnectionConfig } from './ConnectionConfig'
 import ObjectUtils from './util/ObjectUtils'
@@ -9,33 +8,8 @@ import ObjectUtils from './util/ObjectUtils'
  * Connection class for ConvenantSQL connection
  */
 export class Connection {
-  static format(sql: string, values: object | Array<any>): any {
-    return SqlString.format(sql, values)
-  }
-
-  /**
-   * Connection config
-   */
   readonly config: ConnectionConfig
-
-  /**
-   * Connection key buffer
-   */
-  readonly key?: Buffer
-
-  /**
-   * Connection key buffer
-   */
-  readonly https_pem?: Buffer
-
-  /**
-   * Connect() called or not
-   */
   readonly _connectCalled: boolean = false
-
-  /**
-   * Connect() called or not
-   */
   readonly _state: 'disconnected' | 'connected'
 
   /**
@@ -43,10 +17,6 @@ export class Connection {
    */
   constructor(_config: ConnectionConfig) {
     this.config = _config
-    if (!_config.bypassPem) {
-      this.key = Buffer.from(_config.key_dir!)
-      this.https_pem = fs.readFileSync(_config.https_pem_dir!)
-    }
     this._connectCalled = false
     this._state = 'disconnected'
   }
@@ -81,8 +51,8 @@ export class Connection {
     isEstablish: boolean = false
   ): Promise<any> {
     try {
-      const formattedSql = Connection.format(sql, values || [])
-      const result = await this._requestPromise('query', formattedSql)
+      const formattedSql = SqlString.format(sql, values || [])
+      const result = await this._fetch('query', formattedSql)
 
       const _parsed = this._parseResult(result)
       return _parsed.datarows
@@ -96,8 +66,8 @@ export class Connection {
    */
   async exec(sql: string, values?: object | Array<any>): Promise<any> {
     try {
-      const formattedSql = Connection.format(sql, values || [])
-      const result = await this._requestPromise('exec', formattedSql)
+      const formattedSql = SqlString.format(sql, values || [])
+      const result = await this._fetch('exec', formattedSql)
       const _parsed = this._parseResult(result)
       return _parsed.status === 'ok' || _parsed.status
     } catch (e) {
@@ -106,48 +76,22 @@ export class Connection {
   }
 
   /**
-   * _requestPromise: request promise for query and exec
+   * _fetch: request promise for query and exec
    */
-  protected async _requestPromise(
+  protected async _fetch(
     method: 'query' | 'exec',
     sql: string
   ): Promise<any> {
-    // process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"
-    const httpPrefix = this.config.bypassPem ? 'http' : 'https'
-    const database = this.config.database
+    const database = this.config.dbid
+    let uri = `http://${this.config.endpoint}/v1/${method}`
 
-    let options = null
-
-    if (this.config.bypassPem) {
-      let uri = `http://${this.config.endpoint}/v1/${method}`
-
-      options = {
-        uri,
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        form: { assoc: true, database, query: sql },
-        rejectUnauthorized: false,
-      }
-    } else {
-      let uri = `https://${this.config.endpoint}/v1/${method}`
-      let key = this.key
-      let cert = this.https_pem
-
-      options = {
-        uri,
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        form: { assoc: true, database, query: sql },
-        rejectUnauthorized: false,
-        agentOptions: { cert, key },
-      }
+    let options = {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ assoc: true, database, query: sql }),
     }
 
-    return await rp(options).catch(e => {
-      throw new Error(
-        `status code: ${e.statusCode},\n${e.error}`
-      )
-    })
+    return fetch(uri, options).catch(e => { throw e })
   }
 
   /**

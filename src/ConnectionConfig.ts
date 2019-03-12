@@ -10,20 +10,5 @@ export interface ConnectionConfig {
   /**
    * Database id of current connection
    */
-  readonly database: string
-
-  /**
-   * Use https or not
-   */
-  readonly bypassPem?: boolean
-
-  /**
-   * Connection key directory
-   */
-  readonly key_dir?: string
-
-  /**
-   * Connection HTTPS PEM directory
-   */
-  readonly https_pem_dir?: string
+  readonly dbid: string
 }

@@ -24,13 +24,6 @@ export * from './ConnectionConfig'
 export { ConnectionConfig } from './ConnectionConfig'
 
 /**
- * Format SQL and replacement values into a SQL string.
- */
-export function format(sql: string, values: object | Array<any>): any {
-  return Connection.format(sql, values)
-}
-
-/**
  * Create a new connection instance
  */
 export function createConnection(

@@ -1,0 +1,19 @@
+<html>
+  <script src="../dist/covenantsql-proxy.js" charset="utf-8"></script>
+  <script>
+    covenantsqlProxy
+      .createConnection({
+        endpoint: '127.0.0.1:8888',
+        database:
+          '16c421128eeb8bb6c35eb633a16d206edbd653ce52c52dcda0abb767d2bb9ed0',
+      })
+      .then(connection => {
+        connection.query('select ? + ?', [2.1, 3.2]).then(data => {
+          console.log(data)
+        })
+      })
+  </script>
+  <body>
+    CovenantSQL Proxy Test
+  </body>
+</html>

@@ -1,25 +1,16 @@
-# node-covenantsql
+# covenantsql-proxy-js
 
-<p align="left">
-    <a href="https://codecov.io/gh/CovenantSQL/node-covenantsql">
-        <img src="https://codecov.io/gh/CovenantSQL/node-covenantsql/branch/master/graph/badge.svg"
-            alt="Coverage"></a>
-    <a href="https://opensource.org/licenses/Apache-2.0">
-        <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"
-            alt="License"></a>
-</p>
-
-This repo is nodejs driver for [CovenantSQL](https://github.com/CovenantSQL/CovenantSQL) written by TypeScript.
+This repo is javascript lib to interact with [CovenantSQL](https://github.com/CovenantSQL/CovenantSQL) local proxy.
 
 ## Install
 
-Install `node-covenantsql` via npm or yarn:
+Install `covenantsql-proxy-js` via npm or yarn:
 ```bash
-npm install --save node-covenantsql
+npm install --save covenantsql-proxy-js
 ```
 or
 ```bash
-yarn add node-covenantsql
+yarn add covenantsql-proxy-js
 ```
 
 ## Get started
@@ -28,29 +19,27 @@ Follow CovenantSQL [Quickstart](https://testnet.covenantsql.io/quickstart) to ge
 
 ### configs for driver
 
-- If the CovenantSQL endpoint comes with `HTTPS` then `.pem` and `.key` files are needed for requests:
+1. set up CovenantSQL local proxy
+
+```bash
+$ go get github.com/CovenantSQL/CovenantSQL
+$ make bin/cql
+$ rsync -avP ./conf/testnet/{config.yaml,private.key} ~/.cql/
+$ ./bin/cql -adapter 127.0.0.1:6000
+```
+
+2. fill in the configs
 
 ```javascript
 const config = {
-    endpoint: 'e.morenodes.com:11108', // testnet endpoint with https
+    endpoint: 'localhost:6000', // local testnet endpoint without https
     database: `${DB_ID}`, // your DB id created by `cql` tools
-    key_dir: path.resolve(`${KEY_FILE_RELATIVE_PATH}`), // your key file
-    https_pem_dir: path.resolve(`${PEM_FILE_RELATIVE_PATH}`) // your pem file (cert file)
 }
 ```
 
-- If only `HTTP` is needed, then your config could be:
-
-```javascript
-const config = {
-    endpoint: 'localhost:11105', // local testnet endpoint without https
-    database: `${DB_ID}`, // your DB id created by `cql` tools
-    bypassPem: true // bypass https config
-}
-```
 ### connect and query
 ```typescript
-const cql from 'node-covenantsql'
+const cql from 'covenantsql-proxy-js'
 
 const config = {...} // see above
 
@@ -58,7 +47,7 @@ cql.createConnection(config).then(async (connection: any) => {
     // read
     const data1 = await connection.query("select ? + ?", [2.1, 3.2]);
     console.log(data1);
-        
+
     // write
     const createTableSQL = `
     CREATE TABLE IF NOT EXISTS contacts (\

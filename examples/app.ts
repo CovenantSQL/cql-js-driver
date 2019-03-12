@@ -1,7 +1,7 @@
 var covenantsql = require('../dist/node-covenantsql.cjs.js')
 
 const config = {
-  endpoint: 'localhost:11105',
+  endpoint: 'localhost:6000',
   database:
     '0a10b74439f2376d828c9a70fd538dac4b69e0f4065424feebc0f5dbc8b34872',
   bypassPem: true

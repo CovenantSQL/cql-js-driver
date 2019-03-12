@@ -21,10 +21,6 @@ import { ConnectionConfig } from './ConnectionConfig';
 export * from './ConnectionConfig';
 export { ConnectionConfig } from './ConnectionConfig';
 /**
- * Format SQL and replacement values into a SQL string.
- */
-export declare function format(sql: string, values: object | Array<any>): any;
-/**
  * Create a new connection instance
  */
 export declare function createConnection(config: ConnectionConfig): Promise<Connection>;
