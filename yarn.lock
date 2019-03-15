@@ -2992,9 +2992,9 @@ sprintf-js@~1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
 
-sql92-string@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/sql92-string/-/sql92-string-1.0.0.tgz#ee0c4c04215c87cdcbd421691018ade68b1aff85"
+sql92-string@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/sql92-string/-/sql92-string-1.0.1.tgz#dc650fd06062a6995bb28b2e576b6b9c1167a050"
 
 sshpk@^1.7.0:
   version "1.16.1"

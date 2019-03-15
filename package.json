@@ -15,7 +15,7 @@
   "description": "A javascript driver for covenantsql run in web",
   "dependencies": {
     "@types/whatwg-fetch": "^0.0.33",
-    "sql92-string": "^1.0.0",
+    "sql92-string": "^1.0.1",
     "whatwg-fetch": "^3.0.0"
   },
   "engines": {
