@@ -14,9 +14,8 @@
   "browser": "dist/covenantsql-proxy.js",
   "description": "A javascript driver for covenantsql run in web",
   "dependencies": {
-    "@types/sqlstring": "^2.2.0",
     "@types/whatwg-fetch": "^0.0.33",
-    "sqlstring": "^2.3.1",
+    "sql92-string": "^1.0.0",
     "whatwg-fetch": "^3.0.0"
   },
   "engines": {

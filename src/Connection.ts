@@ -1,5 +1,5 @@
 import "whatwg-fetch"
-import SqlString from 'sqlstring'
+import SqlString from 'sql92-string'
 
 import { ConnectionConfig } from './ConnectionConfig'
 import ObjectUtils from './util/ObjectUtils'

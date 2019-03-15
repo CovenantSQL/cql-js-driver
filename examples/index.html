@@ -12,26 +12,45 @@
           console.log(data)
         })
 
-        const createTableSQL = `
-        CREATE TABLE IF NOT EXISTS contacts (\
-        contact_id INTEGER PRIMARY KEY,
-        first_name TEXT NOT NULL,
-        last_name TEXT NOT NULL,
-        email text NOT NULL UNIQUE,
-        phone text NOT NULL UNIQUE
-        );
-        `
-        connection
-          .exec(createTableSQL)
-          .then(status => {
-            console.log(`exec status:`, status)
-          })
-          .catch(e => {
-            console.error(e)
-          })
+        const writeSQL = "INSERT INTO stackedit (name, content, created_at, updated_at) VALUES ('barrr', 'foo''bar', '', '');";
+
+        // const name = 'barrrr';
+        // const serializedContent = "fooo'bar";
+        // const now = (new Date()).toISOString();
+        //
+        // connection.exec(writeSQL, [name, serializedContent, now, now]);
+        connection.exec(writeSQL);
+
+        // const dropTableSQL = `
+        //   DROP TABLE stackedit;
+        // `
+        // connection
+        //   .exec(dropTableSQL)
+        //   .then(status => {
+        //     console.log(`exec status:`, status)
+        //   })
+        //   .catch(e => {
+        //     console.error(e)
+        //   })
+        //
+        // // CREATE TABLE IF NOT EXISTS contacts (\
+        // // contact_id INTEGER PRIMARY KEY,
+        // // first_name TEXT NOT NULL,
+        // // last_name TEXT NOT NULL,
+        // // email text NOT NULL UNIQUE,
+        // // phone text NOT NULL UNIQUE
+        //
+        // connection
+        //   .exec(createTableSQL)
+        //   .then(status => {
+        //     console.log(`exec status:`, status)
+        //   })
+        //   .catch(e => {
+        //     console.error(e)
+        //   })
 
         connection
-          .query('show tables;')
+          .query('show create table stackedit;')
           .then(data => {
             console.log(data)
           })

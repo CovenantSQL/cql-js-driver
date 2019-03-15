@@ -591,7 +591,7 @@
       '\r'   : '\\r',
       '\x1a' : '\\Z',
       '"'    : '\\"',
-      '\''   : '\\\'',
+      "'"   : "''", // SQL92 use double single quote to escape single quote
       '\\'   : '\\\\'
     };
 
@@ -817,7 +817,7 @@
     }
     });
 
-    var sqlstring = SqlString_1;
+    var sql92String = SqlString_1;
 
     var ObjectUtils = /** @class */ (function () {
         function ObjectUtils() {
@@ -902,7 +902,7 @@
                     switch (_a.label) {
                         case 0:
                             _a.trys.push([0, 2, , 3]);
-                            formattedSql = sqlstring.format(sql, values || []);
+                            formattedSql = sql92String.format(sql, values || []);
                             return [4 /*yield*/, this._fetch('query', formattedSql)];
                         case 1:
                             rows = _a.sent();
@@ -925,7 +925,7 @@
                     switch (_a.label) {
                         case 0:
                             _a.trys.push([0, 2, , 3]);
-                            formattedSql = sqlstring.format(sql, values || []);
+                            formattedSql = sql92String.format(sql, values || []);
                             return [4 /*yield*/, this._fetch('exec', formattedSql)];
                         case 1:
                             rows = _a.sent();
