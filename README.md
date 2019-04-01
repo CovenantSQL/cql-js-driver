@@ -39,7 +39,7 @@ const config = {
 
 ### connect and query
 ```typescript
-const cql from 'covenantsql-proxy-js'
+import cql from 'covenantsql-proxy-js'
 
 const config = {...} // see above
 
