@@ -948,7 +948,7 @@
                     switch (_a.label) {
                         case 0:
                             database = this.config.dbid;
-                            uri = "http://" + this.config.endpoint + "/v1/" + method;
+                            uri = this.config.endpoint + "/v1/" + method;
                             options = {
                                 method: 'POST',
                                 headers: { 'content-type': 'application/json' },

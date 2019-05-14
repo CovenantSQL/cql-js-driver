@@ -16,8 +16,18 @@ yarn add covenantsql-proxy-js
 ## Get started
 Follow CovenantSQL [Quickstart](https://testnet.covenantsql.io/quickstart) to get you prepared.
 
+### use testnet proxy directly
 
-### configs for driver
+We provides testnet proxy for your testing: `http(s)://testnet-proxy.covenantsql.io`
+
+```javascript
+const config = {
+    endpoint: 'https://testnet-proxy.covenantsql.io',
+    dbid: `${DB_ID}`, // your DB id created by `cql` tools
+}
+```
+
+### if you setup your own proxy
 
 1. set up CovenantSQL local proxy
 
@@ -65,6 +75,11 @@ cql.createConnection(config).then(async (connection: any) => {
     console.log(data2);
 }).catch((e: any) => console.log(e))
 ```
+
+## Contribution
+
+- `yarn dev`
+- open `http://localhost:8080/examples/`
 
 ## License
 

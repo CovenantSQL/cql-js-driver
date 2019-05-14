@@ -80,7 +80,7 @@ export class Connection {
     sql: string
   ): Promise<any> {
     const database = this.config.dbid
-    let uri = `http://${this.config.endpoint}/v1/${method}`
+    let uri = `${this.config.endpoint}/v1/${method}`
 
     let options = {
       method: 'POST',

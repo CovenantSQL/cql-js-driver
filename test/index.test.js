@@ -1,12 +1,8 @@
-const covenantsql = require('../src')
+const covenantsql = require('../dist/covenantsql-proxy.js')
 
 const connectionConfig = {
-  host: 'localhost',
-  port: 11105,
-  database: '0a10b74439f2376d828c9a70fd538dac4b69e0f4065424feebc0f5dbc8b34872',
-  bypassPem: true,
-  // key_dir: path.resolve(__dirname, './ssl/write.test.covenantsql.io.key'),
-  // https_pem_dir: path.resolve(__dirname, './ssl/write.test.covenantsql.io.pem')
+  endpoint: 'http://testnet-proxy.covenantsql.io',
+  database: '16c421128eeb8bb6c35eb633a16d206edbd653ce52c52dcda0abb767d2bb9ed0'
 }
 
 describe("Format test", () => {
