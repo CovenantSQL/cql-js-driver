@@ -1,16 +1,16 @@
-# covenantsql-proxy-js
+# cql-js-driver
 
 This repo is javascript lib to interact with [CovenantSQL](https://github.com/CovenantSQL/CovenantSQL) local proxy.
 
 ## Install
 
-Install `covenantsql-proxy-js` via npm or yarn:
+Install `cql-js-driver` via npm or yarn:
 ```bash
-npm install --save covenantsql-proxy-js
+npm install --save cql-js-driver
 ```
 or
 ```bash
-yarn add covenantsql-proxy-js
+yarn add cql-js-driver
 ```
 
 ## Get started
@@ -49,7 +49,7 @@ const config = {
 
 ### connect and query
 ```typescript
-import cql from 'covenantsql-proxy-js'
+import cql from 'cql-js-driver'
 
 const config = {...} // see above
 

@@ -1,6 +1,6 @@
 {
-  "name": "covenantsql-proxy-js",
-  "version": "0.2.2",
+  "name": "cql-js-driver",
+  "version": "0.1.0",
   "keywords": [
     "CovenantSQL",
     "driver",
