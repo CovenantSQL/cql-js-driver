@@ -14,7 +14,7 @@ yarn add cql-js-driver
 ```
 
 ## Get started
-Follow CovenantSQL [Quickstart](https://testnet.covenantsql.io/quickstart) to get you prepared.
+Follow CovenantSQL [QuickStart](https://testnet.covenantsql.io/quickstart) to get you prepared.
 
 ### use testnet proxy directly
 
@@ -23,7 +23,7 @@ We provides testnet proxy for your testing: `http(s)://testnet-proxy.covenantsql
 ```javascript
 const config = {
     endpoint: 'https://testnet-proxy.covenantsql.io',
-    dbid: `${DB_ID}`, // your DB id created by `cql` tools
+    dbid: `${DB_ID}`, // your DB id created by `cql` tools in QuickStart
 }
 ```
 
@@ -35,14 +35,14 @@ const config = {
 $ go get github.com/CovenantSQL/CovenantSQL
 $ make bin/cql
 $ rsync -avP ./conf/testnet/{config.yaml,private.key} ~/.cql/
-$ ./bin/cql -adapter 127.0.0.1:6000
+$ ./bin/cql -adapter 127.0.0.1:11105
 ```
 
 2. fill in the configs
 
 ```javascript
 const config = {
-    endpoint: 'localhost:6000', // local testnet endpoint without https
+    endpoint: '127.0.0.1:11105', // local testnet endpoint without https
     dbid: `${DB_ID}`, // your DB id created by `cql` tools
 }
 ```
