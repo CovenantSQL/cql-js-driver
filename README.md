@@ -22,7 +22,7 @@ We provides testnet proxy for your testing: `http(s)://testnet-proxy.covenantsql
 
 ```javascript
 const config = {
-    endpoint: 'https://testnet-proxy.covenantsql.io',
+    endpoint: 'http://testnet-proxy.covenantsql.io',
     dbid: `${DB_ID}`, // your DB id created by `cql` tools in QuickStart
 }
 ```
